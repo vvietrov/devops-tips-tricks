@@ -9,14 +9,14 @@
     type        = map(any)
 
     default = {
-        vm-audit-db-archive-win = {
+        vm-01 = {
         vm_name = "vm-01",
         rg_name  = "rg-01",
         cpu_load = 80,
         ram_usage = 80,
         disk_usage = 80
         },
-        vm-audit-db-archive-win2 = {
+        vm-02 = {
         vm_name = "vm-02",
         rg_name  = "rg-01",
         cpu_load = 80,
