@@ -9,8 +9,8 @@ locals {
 # One module call - one VM
 # A VM sends monitoring information to Azure Monitor, Log Analytics is not used
 # In variable "vms" we specify a list of VMs with required and optional parameters
-# vm_name and resource_group_name are required, the rest is optional
-# A system-managed identity is required for a VM to send monitoring information to Azure Monitor. The module installs it if it is not enabled.
+# vm_name and resource_group_name are required, the rest are optional
+# A system-managed identity is required for a VM to send monitoring information to Azure Monitor. The module installs it, if it's not enabled.
 
 module "windows_vm_monitoring" {
   for_each = { for vm in var.vms : vm.vm_name => vm }
