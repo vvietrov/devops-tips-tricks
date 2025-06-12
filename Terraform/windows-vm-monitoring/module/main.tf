@@ -55,6 +55,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       sampling_frequency_in_seconds = 60
       counter_specifiers = [
         "\\LogicalDisk(*)\\% Free Space",
+        "\\LogicalDisk(*)\\Free Megabytes",
       ]
     }
     extension {
