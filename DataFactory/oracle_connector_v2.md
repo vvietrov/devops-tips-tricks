@@ -1,7 +1,8 @@
-Install Oracle wallet and configure it to use with ADF...
-Download Oracle Full client from Oracle web site. This requires to have an Oracle account. It
-can be created free of charge.
-The full client is required because it contains Oracle Wallet.
+## Install Oracle wallet and configure it to use with ADF.
+The page describes a way of configuring Oracle Wallet on a self-hosted integration runtime (IR) and using it with Oracle V2 connector.
+
+Download Oracle Full client from Oracle web site. This requires to have an Oracle account. It can be created free of charge.
+The full client is required because it contains Oracle Wallet and associated tools.
 
 ![pic](oracle_connector_v2/adf01.jpg)
 
