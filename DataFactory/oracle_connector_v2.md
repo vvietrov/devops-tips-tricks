@@ -1,7 +1,11 @@
-Install Oracle wallet and configure it to use with ADF...
-Download Oracle Full client from Oracle web site. This requires to have an Oracle account. It
-can be created free of charge.
-The full client is required because it contains Oracle Wallet.
+## Install Oracle wallet and configure it to use with ADF.
+The page describes a way of configuring Oracle Wallet on a self-hosted integration runtime (IR) and using it with Oracle V2 connector.
+
+After updating Oracle linked service from V1 to V2 there could be issues with timeouts. Random connection requests stuck for hours and fail after timeout period ends. The proposed configuration example was advised by a Microsoft support engineer and fixed the problem in my case. Though, it may not help in other situations.
+
+Download Oracle **Full** client from the [Oracle web site](https://www.oracle.com/database/technologies/oracle19c-windows-downloads.html).
+The full client is required because it contains Oracle Wallet and the associated tools.
+You may need to have an Oracle account, but it can be created free of charge.
 
 ![pic](oracle_connector_v2/adf01.jpg)
 
