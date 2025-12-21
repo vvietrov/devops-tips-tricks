@@ -7,42 +7,48 @@ Download Oracle **Full** client from the [Oracle web site](https://www.oracle.co
 The full client is required because it contains Oracle Wallet and the associated tools.
 You may need to have an Oracle account, but it can be created free of charge.
 
+On the download page it should look like this:
+
 ![pic](oracle_connector_v2/adf01.jpg)
 
 Run installation.
-Oracle Advanced Security component is the minimum we need.
+**Oracle Advanced Security** is the only component we need.
 
 ![pic](oracle_connector_v2/adf02.jpg)
 
-
-The summary installation page should look like this.
+A reboot is not required.
+The summary installation page.
 
 ![pic](oracle_connector_v2/adf03.jpg)
 
-After the installation is completed create the following system environment variables
-Let’s assume this folder will be used for Oracle Wallet - C:\OracleWallet
-TNS_ADMIN = C:\OracleWallet
+After the installation finishes there are additional steps to be completed:
+
+1. Create system environment variable that will point to the Oracle wallet location, as well as SQLNET.ORA and TNSNAMES.ORA files.
+Let’s assume the folder is - C:\OracleWallet. In that case, the variable should look like this:
+
+`TNS_ADMIN = C:\OracleWallet`
 
 ![pic](oracle_connector_v2/adf07.jpg)
 
 
-Make sure the Oracle bin folder C:\app\client\clinigenadmin\product\19.0.0\client_1\bin has been added to the default Path environment variable.
+2. Ensure the Oracle bin folder **C:\app\client\clinigenadmin\product\19.0.0\client_1\bin** was added to the default Path environment variable.
 
 ![pic](oracle_connector_v2/adf04.jpg)
 
 
-Create folder - C:\OracleWallet
-Create Oracle wallet in that folder by executing
+3. Create folder - **C:\OracleWallet**
 
-mkstore -wrl C:\OracleWallet\ -create
+4. Create Oracle wallet in that folder by executing
 
-This step will require you to create a password.
-After that, there will be two new files cwallet.sso and ewallet.p12
+`mkstore -wrl C:\OracleWallet\ -create`
 
-Create two more files in the same folder. Here are the examples.
+The command will ask for a password. Write it down. It will be used later.
+Check there are two new files cwallet.sso and ewallet.p12
 
-1. SQLNET.
-ORA
+5. Create two more files in the folder, replacing values **alias**, **servername.domain.com** and **servicename** Here are the examples.
+
+**SQLNET.ORA**
+```
 sqlnet.authentication_services= (NTS)
 NAMES.
 DIRECTORY_PATH= (TNSNAMES)
@@ -53,29 +59,33 @@ SSL_VERSION = 0
 WALLET_LOCATION =
 (SOURCE = (METHOD = FILE)
 (METHOD_DATA = (DIRECTORY = C:\OracleWallet)))
-2. TNSNAMES.
-ORA
-u01 =
+```
+**TNSNAMES.ORA**
+```
+alias =
 (DESCRIPTION =
 (ADDRESS_LIST =
-(ADDRESS = (PROTOCOL = TCP) (HOST = servername.domain.com
-) (PORT =
-1521))
+(ADDRESS = (PROTOCOL = TCP) (HOST = servername.domain.com) (PORT = 1521))
 )
 (CONNECT_DATA =
 (SERVICE_NAME = servicename)
 )
 )
+```
+By doing this, we define the Oracle wallet location and bind alias to the connection string.
 
-By doing this, we define the Oracle wallet location and bind alias u01 to connection string servername.domain.com:1521/servicename 
-Create username/password credentials in the wallet by executing
-mkstore -wrl C:\OracleWallet\ -createCredential u01 USERNAME PASSW0RD
-Test connectivity to Oracle DB by tsnping command
+6. Create username/password credentials in the wallet by executing
+```mkstore -wrl C:\OracleWallet\ -createCredential alias USERNAME PASSW0RD```
+Use the password from step 4
+
+7. Test connectivity to the DB by **tsnping** command. There should be **OK** in the end.
 
 ![pic](oracle_connector_v2/adf05.jpg)
 
-To make sure all the settings are applied, run Microsoft Integration Runtime and STOP and START runtime services.
-After that the new alias can be used in ADF instead of the full connection string.
+To make sure all the settings are applied, start **Microsoft Integration Runtime** and then **STOP** and **START** runtime services.
+After that the new alias can be used in an ADF linked service instead of the full connection string.
 Please note that you still need to enter the same username and password on the ADF side.
 
 ![pic](oracle_connector_v2/adf06.jpg)
+
+That's it!
